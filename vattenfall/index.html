@@ -7,9 +7,21 @@
 
   <style>
     :root { color-scheme: dark; }
-    html, body { background: #000; color: #f8f8ff; margin: 0; height: 100%; overflow: hidden; }
+    html, body {
+      background: #000;
+      color: #f8f8ff;
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
     .shell { visibility: hidden; }
     html.fonts-ready .shell { visibility: visible; }
+    .eyebrow-row .badge {
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+    }
   </style>
 
   <link rel="stylesheet" href="https://use.typekit.net/qal5tnq.css">
@@ -93,16 +105,31 @@
   <script>
     (function () {
       var html = document.documentElement;
-      var mark = function () { html.classList.add('fonts-ready'); };
-      if (document.fonts && document.fonts.load) {
-        Promise.all([
-          document.fonts.load('1em Inter'),
-          document.fonts.load('1em "lores-9-wide"'),
-        ]).then(mark, mark);
-        setTimeout(mark, 1500);
-      } else {
-        mark();
+      var marked = false;
+      function mark() {
+        if (marked) return;
+        marked = true;
+        html.classList.add('fonts-ready');
       }
+
+      function fontsLoaded() {
+        if (!document.fonts || !document.fonts.load) return Promise.resolve();
+        return Promise.all([
+          document.fonts.load('400 1em Inter'),
+          document.fonts.load('500 1em Inter'),
+          document.fonts.load('1em "lores-9-wide"'),
+        ]).catch(function () {});
+      }
+
+      function pageLoaded() {
+        if (document.readyState === 'complete') return Promise.resolve();
+        return new Promise(function (resolve) {
+          window.addEventListener('load', resolve, { once: true });
+        });
+      }
+
+      Promise.all([fontsLoaded(), pageLoaded()]).then(mark, mark);
+      setTimeout(mark, 2500);
     })();
   </script>
 </body>

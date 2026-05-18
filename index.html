@@ -7,9 +7,24 @@
 
   <style>
     :root { color-scheme: dark; }
-    html, body { background: #000; color: #f8f8ff; margin: 0; height: 100%; overflow: hidden; }
+    html, body {
+      background: #000;
+      color: #f8f8ff;
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    /* Hold the entire shell off-screen until fonts + stylesheets are fully
+       loaded. Prevents FOUT (weight swap), FOIT, and DaisyUI-late layout jumps. */
     .shell { visibility: hidden; }
     html.fonts-ready .shell { visibility: visible; }
+    /* Pin badge geometry so DaisyUI loading late can't change radius/shape. */
+    .eyebrow-row .badge {
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+    }
   </style>
 
   <link rel="stylesheet" href="https://use.typekit.net/qal5tnq.css">
@@ -91,16 +106,33 @@
   <script>
     (function () {
       var html = document.documentElement;
-      var mark = function () { html.classList.add('fonts-ready'); };
-      if (document.fonts && document.fonts.load) {
-        Promise.all([
-          document.fonts.load('1em Inter'),
-          document.fonts.load('1em "lores-9-wide"'),
-        ]).then(mark, mark);
-        setTimeout(mark, 1500);
-      } else {
-        mark();
+      var marked = false;
+      function mark() {
+        if (marked) return;
+        marked = true;
+        html.classList.add('fonts-ready');
       }
+
+      function fontsLoaded() {
+        if (!document.fonts || !document.fonts.load) return Promise.resolve();
+        // Every Inter weight + lores-9-wide we actually render — force them all
+        // so the reveal happens after the final font is in, not after just 400.
+        return Promise.all([
+          document.fonts.load('400 1em Inter'),
+          document.fonts.load('500 1em Inter'),
+          document.fonts.load('1em "lores-9-wide"'),
+        ]).catch(function () {});
+      }
+
+      function pageLoaded() {
+        if (document.readyState === 'complete') return Promise.resolve();
+        return new Promise(function (resolve) {
+          window.addEventListener('load', resolve, { once: true });
+        });
+      }
+
+      Promise.all([fontsLoaded(), pageLoaded()]).then(mark, mark);
+      setTimeout(mark, 2500);
     })();
   </script>
 </body>

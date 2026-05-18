@@ -129,12 +129,15 @@ html.fonts-ready .shell { visibility: visible; }
 .eyebrow-row .badge {
   background: transparent;
   border: 1px solid var(--border-strong);
+  border-radius: 4px;
   color: var(--text-muted);
   font-family: var(--font-display);
   letter-spacing: 0.16em;
   font-size: inherit;
   padding: 4px 10px;
   height: auto;
+  display: inline-flex;
+  align-items: center;
 }
 .eyebrow-divider {
   height: 1px;
