@@ -113,25 +113,12 @@
         marked = true;
         html.classList.add('fonts-ready');
       }
-
-      function fontsLoaded() {
-        if (!document.fonts || !document.fonts.load) return Promise.resolve();
-        return Promise.all([
-          document.fonts.load('400 1em Inter'),
-          document.fonts.load('500 1em Inter'),
-          document.fonts.load('1em "lores-9-wide"'),
-        ]).catch(function () {});
+      if (document.readyState === 'complete') {
+        mark();
+      } else {
+        window.addEventListener('load', mark, { once: true });
       }
-
-      function pageLoaded() {
-        if (document.readyState === 'complete') return Promise.resolve();
-        return new Promise(function (resolve) {
-          window.addEventListener('load', resolve, { once: true });
-        });
-      }
-
-      Promise.all([fontsLoaded(), pageLoaded()]).then(mark, mark);
-      setTimeout(mark, 2500);
+      setTimeout(mark, 1200);
     })();
   </script>
 </body>

@@ -114,27 +114,15 @@
         marked = true;
         html.classList.add('fonts-ready');
       }
-
-      function fontsLoaded() {
-        if (!document.fonts || !document.fonts.load) return Promise.resolve();
-        // Every Inter weight + lores-9-wide we actually render — force them all
-        // so the reveal happens after the final font is in, not after just 400.
-        return Promise.all([
-          document.fonts.load('400 1em Inter'),
-          document.fonts.load('500 1em Inter'),
-          document.fonts.load('1em "lores-9-wide"'),
-        ]).catch(function () {});
+      // Reveal as soon as all stylesheets are in. Fonts may still be downloading
+      // and swap a tick later — that's a smaller perceived shift than the
+      // longer black hold we get by also waiting for document.fonts.ready.
+      if (document.readyState === 'complete') {
+        mark();
+      } else {
+        window.addEventListener('load', mark, { once: true });
       }
-
-      function pageLoaded() {
-        if (document.readyState === 'complete') return Promise.resolve();
-        return new Promise(function (resolve) {
-          window.addEventListener('load', resolve, { once: true });
-        });
-      }
-
-      Promise.all([fontsLoaded(), pageLoaded()]).then(mark, mark);
-      setTimeout(mark, 2500);
+      setTimeout(mark, 1200);
     })();
   </script>
 </body>
