@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Vattenfall AI Inspiration · UX Experiments</title>
 
+  <style>
+    :root { color-scheme: dark; }
+    html, body { background: #000; color: #f8f8ff; margin: 0; height: 100%; overflow: hidden; }
+    .shell { visibility: hidden; }
+    html.fonts-ready .shell { visibility: visible; }
+  </style>
+
   <link rel="stylesheet" href="https://use.typekit.net/qal5tnq.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -79,9 +86,12 @@
     (function () {
       var html = document.documentElement;
       var mark = function () { html.classList.add('fonts-ready'); };
-      if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(mark);
-        setTimeout(mark, 1200);
+      if (document.fonts && document.fonts.load) {
+        Promise.all([
+          document.fonts.load('1em Inter'),
+          document.fonts.load('1em "lores-9-wide"'),
+        ]).then(mark, mark);
+        setTimeout(mark, 1500);
       } else {
         mark();
       }

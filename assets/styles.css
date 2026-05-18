@@ -243,6 +243,23 @@ html.fonts-ready .shell { visibility: visible; }
   font-weight: 300;
 }
 
+/* Sub-row: a child item under a parent .row. Indented, no top border so it
+   visually attaches to its parent. */
+.row.row-sub {
+  padding-left: calc(clamp(12px, 1.2vw, 20px) + clamp(48px, 4vw, 80px));
+  border-top: none;
+}
+.row.row-sub .row-no {
+  font-family: ui-monospace, monospace;
+  letter-spacing: 0;
+  color: var(--text-dim);
+}
+.row.row-sub .row-title {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: clamp(15px, 1.25vw, 20px);
+}
+
 /* Back link (subpage navigation) ──────────────────── */
 .back-link {
   display: inline-flex;
