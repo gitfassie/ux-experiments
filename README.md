@@ -1,26 +1,41 @@
-# Repo Template
+# UX Experiments Sandbox
 
-Starting point for new projects. Includes secret-scanning out of the box and a pre-configured `.gitignore` for the standard stack (Next.js, TypeScript, Supabase, Vercel).
+Speeltuin waar Claude Code UX-prototypes parkeert. Public repo, static HTML/CSS/JS, gepubliceerd via GitHub Pages.
 
-## What is in this template
+**Live:** https://gitfassie.github.io/ux-experiments/
 
-- **`.github/workflows/gitleaks.yml`** — A workflow that runs the Gitleaks secret scanner on every push and pull request. If anything that looks like an API key, token, or password ends up in a commit, the workflow fails and the commit shows a red cross on GitHub.
-- **`.gitignore`** — Pre-configured to keep `.env.local`, `node_modules`, `.next`, build artifacts, and OS junk files out of Git.
+## Structuur
 
-## How to use this template
+Elke use case krijgt zijn eigen subfolder. Iedere subfolder bevat een `index.html` en alles wat erbij hoort.
 
-When creating a new repository on github.com, click **"Use this template"** at the top of this page and pick **"Create a new repository"**. GitHub copies all the files into the new repo automatically. The Secret Scan workflow starts running on the very first push.
+```
+ux-experiments/
+├── index.html              ← overzicht/landing van alle experimenten
+├── vattenfall/             ← Vattenfall AI Inspiratiesessie (2026-05-19)
+│   └── index.html
+└── README.md
+```
 
-If a repository is created somewhere else first (for example by AI Studio or another tool), you can manually copy `.github/workflows/gitleaks.yml` and `.gitignore` into that repo to get the same protection.
+## Een nieuw experiment toevoegen
 
-## Layered secret protection
+1. Maak een nieuwe subfolder met een korte, kleine-letters naam (bv. `mijn-demo/`).
+2. Zet daar je `index.html` en eventuele assets.
+3. Werk de landingspagina `/index.html` bij met een link naar het nieuwe experiment.
+4. Commit + push naar `main`. GitHub Pages publiceert automatisch.
 
-This template is one of three layers that work together:
+## Conventies
 
-1. **Local pre-commit hook** — Gitleaks runs on this Mac before every commit (configured globally in `~/.git-hooks/pre-commit`).
-2. **GitHub push protection** — Enabled at the account level. Blocks pushes that contain known secret formats from partners like AWS, Stripe, and Slack.
-3. **This workflow** — Runs Gitleaks on GitHub's servers as a final net for anything that slipped past the first two.
+- Geen build step — pure HTML/CSS/JS. Houdt experimenten snel en deelbaar.
+- Geen secrets in code — Gitleaks scant elke push.
+- Een experiment hoort niet langer dan een sessie te leven. Daarna mag het blijven staan als referentie.
 
-## Customizing
+## Design system
 
-If a real value gets falsely flagged, add its fingerprint to a `.gitleaksignore` file in the root of the repository. The fingerprint is shown in the Gitleaks output. Do not bypass the scanner with `--no-verify` as a routine — the whole point is to catch mistakes you didn't notice.
+Alle pagina's gebruiken het [Porsche Design System v4](https://designsystem.porsche.com/v4/). Tokens zijn als CSS-variabelen meegeleverd in elke `<style>`-block:
+
+- Font: "Porsche Next" via `https://cdn.ui.porsche.com/porsche-design-system/fonts/porsche-next.css`
+- Kleuren: `--p-color-canvas`, `--p-color-surface`, `--p-color-primary`, `--p-color-contrast-{low|medium|high}`
+- Spacing: `--p-spacing-static-{sm|md|lg}`, `--p-spacing-fluid-{md|lg|xl|2xl}`
+- Radius: `--p-radius-{sm|md|lg|xl|2xl}`
+
+`color-scheme: light dark;` + `light-dark()` zorgt dat de pagina automatisch volgt met de OS-voorkeur.

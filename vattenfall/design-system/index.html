@@ -1,0 +1,1669 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vattenfall — Design Style Guide</title>
+    <link rel="preconnect" href="https://cdn.vattenfall.nl" crossorigin />
+    <style>
+      /* Vattenfall Hall, geserveerd vanaf cdn.vattenfall.nl */
+      @font-face {
+        font-family: "Vattenfall Hall";
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+        src:
+          url("https://cdn.vattenfall.nl/vattenfallnlprd/latest/assets/fonts/VattenfallHall-Light.woff2")
+            format("woff2");
+      }
+      @font-face {
+        font-family: "Vattenfall Hall";
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+        src:
+          url("https://cdn.vattenfall.nl/vattenfallnlprd/latest/assets/fonts/VattenfallHall-Regular.woff2")
+            format("woff2");
+      }
+      @font-face {
+        font-family: "Vattenfall Hall";
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+        src:
+          url("https://cdn.vattenfall.nl/vattenfallnlprd/latest/assets/fonts/VattenfallHall-Medium.woff2")
+            format("woff2");
+      }
+      @font-face {
+        font-family: "Vattenfall Hall";
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+        src:
+          url("https://cdn.vattenfall.nl/vattenfallnlprd/latest/assets/fonts/VattenfallHall-Bold.woff2")
+            format("woff2");
+      }
+      @font-face {
+        font-family: "Vattenfall Hall";
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+        src:
+          url("https://cdn.vattenfall.nl/vattenfallnlprd/latest/assets/fonts/VattenfallHall-Heavy.woff2")
+            format("woff2");
+      }
+      @font-face {
+        font-family: "Vattenfall Hall Display";
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+        src:
+          url("https://cdn.vattenfall.nl/vattenfallnlprd/latest/assets/fonts/VattenfallHallDisplay-Bold.woff2")
+            format("woff2");
+      }
+
+      :root {
+        --vf-yellow: #ffda00;
+        --vf-blue: #2071b5;
+        --vf-blue-dark: #1a5e9a;
+        --vf-black: #000000;
+        --vf-white: #ffffff;
+        --vf-gray-border: #767676;
+        --vf-gray-50: #f5f5f5;
+        --vf-gray-100: #eeeeee;
+        --vf-gray-200: #dcdcdc;
+        --vf-navy: #1e324f;
+
+        --radius-sm: 4px;
+        --radius-md: 8px;
+        --radius-lg: 16px;
+        --radius-pill: 26px;
+
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 12px 0 rgba(0, 0, 0, 0.08);
+        --shadow-lg: 0 12px 32px 0 rgba(0, 0, 0, 0.12);
+        --shadow-page: 0 0 32px rgba(0, 0, 0, 0.06);
+
+        --font-sans:
+          "Vattenfall Hall", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        --font-display:
+          "Vattenfall Hall Display", "Vattenfall Hall", "Inter", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: var(--font-sans);
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: -0.01em;
+        color: var(--vf-black);
+        background: var(--vf-white);
+      }
+
+      .page {
+        background: var(--vf-white);
+        min-height: 100vh;
+      }
+
+      /* UX Experiments wrapper — terug-link boven de Vattenfall header */
+      .ux-back {
+        background: #fafafa;
+        border-bottom: 1px solid #e6e6e6;
+        padding: 10px 19px;
+        font-family:
+          "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      }
+      .ux-back a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        color: #555;
+        text-decoration: none;
+        transition: color 150ms ease;
+      }
+      .ux-back a:hover {
+        color: #000;
+      }
+      .ux-back__brand {
+        margin-left: 16px;
+        padding-left: 16px;
+        border-left: 1px solid #d0d0d0;
+        color: #999;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      /* ===== Vattenfall Header (twee rijen) ===== */
+      .vf-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: var(--vf-white);
+        border-bottom: 1px solid var(--vf-gray-100);
+      }
+
+      .vf-header__row {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        padding: 0 48px;
+      }
+      .vf-header__row--top {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #e6e6e6;
+      }
+      .vf-header__row--bottom {
+        padding-top: 24px;
+        padding-bottom: 24px;
+      }
+
+      .vf-header__logo {
+        height: 24px;
+        width: auto;
+        display: block;
+        flex-shrink: 0;
+      }
+
+      .vf-header__nav {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        flex: 1;
+        flex-wrap: nowrap;
+      }
+      .vf-header__nav-item {
+        position: relative;
+        padding: 4px 12px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        color: var(--vf-black);
+        text-decoration: none;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-family: inherit;
+        white-space: nowrap;
+      }
+      .vf-header__nav-item--active {
+        font-weight: 500;
+      }
+      .vf-header__nav-item--active::after {
+        content: "";
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: -4px;
+        height: 3px;
+        background: var(--vf-blue);
+        border-radius: 2px;
+      }
+      .vf-header__nav-item:hover {
+        color: var(--vf-blue);
+      }
+
+      /* Brand-guide nav (rij 2) — matching Vattenfall measurements */
+      .vf-header__brand-nav {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        flex: 1;
+        flex-wrap: nowrap;
+      }
+      .vf-header__brand-nav-item {
+        padding: 0;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        color: var(--vf-black);
+        text-decoration: none;
+        background: none;
+        border: none;
+        font-family: inherit;
+        white-space: nowrap;
+        cursor: pointer;
+        letter-spacing: -0.01em;
+      }
+      .vf-header__brand-nav-item:hover {
+        color: var(--vf-blue);
+      }
+
+      .vf-header__right {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        flex-shrink: 0;
+      }
+      .vf-header__link {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        color: var(--vf-black);
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .vf-header__link:hover {
+        color: var(--vf-blue);
+      }
+
+      /* ===== Hero ===== */
+      .vf-hero {
+        position: relative;
+        margin: 0 19px;
+        height: 720px;
+        background-image: url("./assets/nl_dtp.jpg");
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+      }
+
+      .vf-hero__content {
+        position: relative;
+        padding: 128px 56px;
+        max-width: 60%;
+        color: var(--vf-white);
+      }
+
+      .vf-hero__title {
+        font-family: var(--font-display);
+        font-size: 56px;
+        line-height: 64px;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+        margin: 0 0 40px;
+        max-width: 100%;
+        text-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      .vf-hero__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: var(--vf-white);
+        color: var(--vf-blue);
+        padding: 13.8px 48px;
+        border-radius: var(--radius-pill);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        box-shadow: var(--shadow-md);
+        border: none;
+        cursor: pointer;
+        transition: transform 150ms ease, box-shadow 150ms ease;
+      }
+      .vf-hero__cta:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .vf-hero__form {
+        position: absolute;
+        top: 88px;
+        right: 56px;
+        width: 440px;
+        background: var(--vf-blue);
+        color: var(--vf-white);
+        padding: 32px 48px;
+        border-radius: 0;
+      }
+      .vf-hero__form-badge {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        width: 72px;
+        height: 72px;
+        background: var(--vf-yellow);
+        border-radius: 50%;
+        color: var(--vf-black);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        line-height: 1.15;
+        font-size: 12px;
+        font-weight: 400;
+        padding: 8px 0;
+      }
+      .vf-hero__form-badge strong {
+        font-size: 16px;
+        font-weight: 700;
+        display: block;
+      }
+      .vf-hero__form-badge span {
+        display: block;
+      }
+      .vf-hero__form-title {
+        font-family: var(--font-display);
+        font-size: 28px;
+        line-height: 34px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        margin: 0 0 32px;
+        max-width: 11ch;
+      }
+      .vf-hero__form-row {
+        display: grid;
+        grid-template-columns: 1.4fr 1.4fr 0.8fr;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+      .vf-hero__form-field label {
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 6px;
+      }
+      .vf-hero__form-field input {
+        width: 100%;
+        padding: 12px 20px;
+        border: none;
+        border-radius: var(--radius-sm);
+        font-family: inherit;
+        font-size: 16px;
+        line-height: 24px;
+        color: var(--vf-black);
+      }
+      .vf-hero__form-field input::placeholder {
+        color: #999;
+      }
+      .vf-hero__form-check {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        line-height: 20px;
+        margin: 12px 0 20px;
+      }
+      .vf-hero__form-check-box {
+        width: 22px;
+        height: 22px;
+        background: var(--vf-white);
+        color: var(--vf-black);
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .vf-hero__form-submit {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 8px;
+        background: var(--vf-yellow);
+        color: var(--vf-black);
+        padding: 13.8px 48px;
+        border: 2px solid var(--vf-yellow);
+        border-radius: var(--radius-pill);
+        font-family: inherit;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 20px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: transform 150ms ease, box-shadow 150ms ease;
+      }
+      .vf-hero__form-submit:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-md);
+      }
+      .vf-hero__form-foot {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 16px;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      .vf-hero__form-foot-icon {
+        flex-shrink: 0;
+        width: 22px;
+        height: 22px;
+        background: var(--vf-white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--vf-blue);
+      }
+      .vf-hero__form-foot-icon svg {
+        width: 14px;
+        height: 14px;
+      }
+      .vf-hero__form-link {
+        background: var(--vf-blue-dark);
+        margin: 24px -48px -32px;
+        padding: 14px 48px;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: var(--vf-white);
+      }
+      .vf-hero__form-link svg {
+        flex-shrink: 0;
+        width: 16px;
+        height: 16px;
+      }
+
+      /* ===== Section frame ===== */
+      .section {
+        padding: 80px 19px;
+        border-top: 1px solid var(--vf-gray-100);
+      }
+      .section__head {
+        margin-bottom: 48px;
+      }
+      .section__eyebrow {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--vf-blue);
+        margin-bottom: 12px;
+      }
+      .section__title {
+        font-family: var(--font-display);
+        font-size: 40px;
+        line-height: 48px;
+        font-weight: 600;
+        margin: 0;
+        letter-spacing: -0.01em;
+      }
+      .section__lede {
+        font-size: 16px;
+        line-height: 24px;
+        color: #555;
+        margin: 12px 0 0;
+        max-width: 60ch;
+      }
+
+      /* ===== Logos ===== */
+      .logos {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 20px;
+      }
+      .logo-card {
+        border-radius: var(--radius-md);
+        padding: 32px 24px 20px;
+        border: 1px solid var(--vf-gray-100);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        min-height: 180px;
+        justify-content: center;
+      }
+      .logo-card img {
+        max-width: 80%;
+        height: auto;
+        display: block;
+      }
+      .logo-card__img--small {
+        max-height: 48px;
+      }
+      .logo-card__img--invert {
+        filter: brightness(0) invert(1);
+      }
+      .logo-card__meta {
+        font-family: ui-monospace, "JetBrains Mono", Menlo, monospace;
+        font-size: 11px;
+        color: #555;
+        text-align: center;
+      }
+      .logo-card--combo {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .logo-card--combo img {
+        max-width: 40%;
+      }
+      .logo-card__divider {
+        width: 1px;
+        height: 32px;
+        background: var(--vf-gray-100);
+      }
+      .logo-rules {
+        margin-top: 32px;
+        padding: 24px;
+        background: var(--vf-gray-50);
+        border-radius: var(--radius-md);
+      }
+      .logo-rules h3 {
+        margin: 0 0 12px;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .logo-rules ul {
+        margin: 0;
+        padding-left: 20px;
+        color: #333;
+      }
+      .logo-rules li {
+        margin-bottom: 6px;
+      }
+
+      /* ===== Colors ===== */
+      .colors {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+      }
+      .color {
+        cursor: pointer;
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        border: 1px solid var(--vf-gray-100);
+        background: var(--vf-white);
+        transition: transform 150ms ease, box-shadow 150ms ease;
+        position: relative;
+        padding: 0;
+        text-align: left;
+        font: inherit;
+      }
+      .color:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+      .color__swatch {
+        height: 120px;
+        position: relative;
+      }
+      .color__body {
+        padding: 16px;
+      }
+      .color__name {
+        font-weight: 600;
+        font-size: 14px;
+      }
+      .color__hex {
+        font-family: ui-monospace, "JetBrains Mono", Menlo, monospace;
+        font-size: 12px;
+        color: #555;
+        margin-top: 2px;
+      }
+      .color__hint {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        font-size: 11px;
+        background: rgba(0, 0, 0, 0.55);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 999px;
+        opacity: 0;
+        transition: opacity 150ms ease;
+      }
+      .color:hover .color__hint {
+        opacity: 1;
+      }
+
+      /* ===== Typography ===== */
+      .type-row {
+        display: grid;
+        grid-template-columns: 140px 1fr 220px;
+        gap: 32px;
+        align-items: baseline;
+        padding: 20px 0;
+        border-bottom: 1px solid var(--vf-gray-100);
+      }
+      .type-row__meta {
+        font-family: ui-monospace, "JetBrains Mono", Menlo, monospace;
+        font-size: 12px;
+        color: #555;
+      }
+      .type-row__sample {
+        margin: 0;
+        letter-spacing: -0.01em;
+      }
+      .type-row__specs {
+        font-family: ui-monospace, "JetBrains Mono", Menlo, monospace;
+        font-size: 12px;
+        color: #555;
+        text-align: right;
+      }
+      .t-display {
+        font-family: var(--font-display);
+        font-size: 56px;
+        line-height: 64px;
+        font-weight: 600;
+      }
+      .t-h1 {
+        font-family: var(--font-display);
+        font-size: 32px;
+        line-height: 40px;
+        font-weight: 600;
+      }
+      .t-h2 {
+        font-size: 22px;
+        line-height: 32px;
+        font-weight: 600;
+      }
+      .t-h3 {
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 600;
+      }
+      .t-body {
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 400;
+      }
+      .t-nav {
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 500;
+      }
+      .t-small {
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+      }
+
+      /* ===== Buttons ===== */
+      .btn-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 24px;
+      }
+      .btn-card {
+        background: var(--vf-gray-50);
+        padding: 32px;
+        border-radius: var(--radius-md);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .btn-card--dark {
+        background: var(--vf-black);
+        color: var(--vf-white);
+      }
+      .btn-card--blue {
+        background: var(--vf-blue);
+        color: var(--vf-white);
+      }
+      .btn-card__label {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: inherit;
+        opacity: 0.7;
+      }
+      .vf-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 14px 40px;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: inherit;
+        line-height: 1;
+        border: 2px solid transparent;
+        border-radius: var(--radius-pill);
+        cursor: pointer;
+        text-decoration: none;
+        transition:
+          transform 150ms ease,
+          box-shadow 150ms ease,
+          background 150ms ease,
+          color 150ms ease;
+      }
+      .vf-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-md);
+      }
+      .vf-btn--primary {
+        background: var(--vf-yellow);
+        color: var(--vf-black);
+        border-color: var(--vf-yellow);
+      }
+      .vf-btn--primary-white {
+        background: var(--vf-white);
+        color: var(--vf-blue);
+        border-color: var(--vf-white);
+      }
+      .vf-btn--secondary {
+        background: var(--vf-navy);
+        color: var(--vf-white);
+        border-color: var(--vf-navy);
+        border-radius: var(--radius-md);
+        padding: 12px 24px;
+        font-size: 14px;
+      }
+      .vf-btn--ghost {
+        background: transparent;
+        color: var(--vf-black);
+        border-color: var(--vf-black);
+      }
+      .vf-btn--link {
+        background: transparent;
+        color: var(--vf-blue);
+        border: none;
+        padding: 0;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+      .vf-btn--link:hover {
+        transform: none;
+        box-shadow: none;
+        color: var(--vf-navy);
+      }
+
+      /* ===== Form ===== */
+      .form {
+        display: grid;
+        gap: 16px;
+        max-width: 480px;
+      }
+      .form label {
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .form input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid var(--vf-gray-border);
+        border-radius: var(--radius-sm);
+        font-family: inherit;
+        font-size: 14px;
+        line-height: 24px;
+        background: var(--vf-white);
+        color: var(--vf-black);
+      }
+      .form input:focus {
+        outline: 2px solid var(--vf-blue);
+        outline-offset: 2px;
+        border-color: var(--vf-blue);
+      }
+      .form .help {
+        font-size: 12px;
+        color: #555;
+      }
+
+      /* ===== Cards ===== */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px;
+      }
+      .card {
+        background: var(--vf-white);
+        border: 1px solid var(--vf-gray-100);
+        border-radius: var(--radius-md);
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        transition: box-shadow 150ms ease, transform 150ms ease;
+      }
+      .card:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+      }
+      .card__image {
+        height: 140px;
+        border-radius: var(--radius-sm);
+        background: linear-gradient(135deg, var(--vf-yellow), #ffe66c);
+      }
+      .card__image--blue {
+        background: linear-gradient(135deg, var(--vf-blue), #4a8fcd);
+      }
+      .card__image--dark {
+        background: linear-gradient(135deg, var(--vf-black), #333);
+      }
+      .card__title {
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 600;
+        margin: 0;
+      }
+      .card__body {
+        font-size: 14px;
+        color: #555;
+        margin: 0;
+      }
+
+      /* ===== Tile grid (Snel naar) ===== */
+      .tiles {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: var(--vf-gray-100);
+        border: 1px solid var(--vf-gray-100);
+      }
+      .tile {
+        background: var(--vf-white);
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        min-height: 180px;
+        cursor: pointer;
+        transition: background 150ms ease;
+      }
+      .tile:hover {
+        background: var(--vf-gray-50);
+      }
+      .tile__icon {
+        width: 48px;
+        height: 48px;
+        color: var(--vf-black);
+      }
+      .tile__title {
+        font-family: var(--font-display);
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      /* ===== CTA banner ===== */
+      .cta-banner {
+        background: var(--vf-blue);
+        color: var(--vf-white);
+        border-radius: var(--radius-md);
+        padding: 48px 32px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 32px;
+        align-items: center;
+      }
+      .cta-banner__title {
+        font-family: var(--font-display);
+        font-size: 32px;
+        line-height: 40px;
+        font-weight: 600;
+        margin: 0;
+        max-width: 24ch;
+      }
+
+      /* ===== Spacing ===== */
+      .spacing-row {
+        display: grid;
+        grid-template-columns: 80px 1fr 80px;
+        align-items: center;
+        gap: 16px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--vf-gray-100);
+      }
+      .spacing-row__bar {
+        height: 8px;
+        background: var(--vf-yellow);
+        border-radius: 4px;
+      }
+      .spacing-row__token,
+      .spacing-row__value {
+        font-family: ui-monospace, "JetBrains Mono", Menlo, monospace;
+        font-size: 12px;
+        color: #555;
+      }
+      .spacing-row__value {
+        text-align: right;
+      }
+
+      /* ===== Radii ===== */
+      .radii {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 20px;
+      }
+      .radius {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 24px;
+        background: var(--vf-gray-50);
+        border-radius: var(--radius-md);
+      }
+      .radius__box {
+        width: 80px;
+        height: 80px;
+        background: var(--vf-blue);
+      }
+      .radius__name {
+        font-family: ui-monospace, "JetBrains Mono", Menlo, monospace;
+        font-size: 12px;
+        color: #555;
+      }
+
+      /* ===== Toast ===== */
+      .toast {
+        position: fixed;
+        bottom: 32px;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: var(--vf-black);
+        color: var(--vf-white);
+        padding: 12px 24px;
+        border-radius: var(--radius-pill);
+        font-size: 14px;
+        font-weight: 500;
+        box-shadow: var(--shadow-lg);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 200ms ease, transform 200ms ease;
+      }
+      .toast.is-visible {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      /* ===== Footer ===== */
+      footer.foot {
+        padding: 48px 19px;
+        border-top: 1px solid var(--vf-gray-100);
+        font-size: 14px;
+        color: #555;
+      }
+      .foot__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 1280px) {
+        .vf-header__brand-nav {
+          gap: 12px;
+        }
+        .vf-hero__title {
+          font-size: 48px;
+          line-height: 56px;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .vf-hero {
+          height: auto;
+        }
+        .vf-hero__form {
+          position: static;
+          width: auto;
+          margin: 24px;
+        }
+        .tiles {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .vf-header__brand-counter {
+          display: none;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .vf-header__row {
+          flex-wrap: wrap;
+          gap: 12px;
+          padding: 12px 20px;
+        }
+        .vf-header__search {
+          min-width: 100%;
+        }
+        .vf-hero {
+          margin: 0 20px;
+        }
+        .vf-hero__title {
+          font-size: 40px;
+          line-height: 48px;
+        }
+        .section {
+          padding: 56px 20px;
+        }
+        .section__title {
+          font-size: 28px;
+          line-height: 36px;
+        }
+        .type-row {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+        .type-row__specs {
+          text-align: left;
+        }
+        .cta-banner {
+          grid-template-columns: 1fr;
+        }
+        .tiles {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ux-back">
+      <a href="../index.html">← Vattenfall experiments<span class="ux-back__brand">EdBloom · UX Experiments</span></a>
+    </div>
+    <div class="page">
+      <!-- ===== Vattenfall Header ===== -->
+      <header class="vf-header">
+        <div class="vf-header__row vf-header__row--top">
+          <a href="#" aria-label="Vattenfall home">
+            <img
+              src="./assets/logo-vattenfall.svg"
+              alt="Vattenfall"
+              class="vf-header__logo"
+            />
+          </a>
+          <nav class="vf-header__nav">
+            <a class="vf-header__nav-item vf-header__nav-item--active" href="#">Thuis</a>
+            <a class="vf-header__nav-item" href="#">Zzp</a>
+            <a class="vf-header__nav-item" href="#">Mkb</a>
+            <a class="vf-header__nav-item" href="#">Grootzakelijk</a>
+            <a class="vf-header__nav-item" href="#">Over Vattenfall</a>
+          </nav>
+          <div class="vf-header__right">
+            <a href="#" class="vf-header__link">Inloggen</a>
+            <a href="#" class="vf-header__link">Contact</a>
+          </div>
+        </div>
+        <div class="vf-header__row vf-header__row--bottom">
+          <nav class="vf-header__brand-nav">
+            <a class="vf-header__brand-nav-item" href="#logos">Logo</a>
+            <a class="vf-header__brand-nav-item" href="#colors">Kleuren</a>
+            <a class="vf-header__brand-nav-item" href="#typography">Typografie</a>
+            <a class="vf-header__brand-nav-item" href="#buttons">Knoppen</a>
+            <a class="vf-header__brand-nav-item" href="#forms">Inputs</a>
+            <a class="vf-header__brand-nav-item" href="#cards">Cards</a>
+            <a class="vf-header__brand-nav-item" href="#cta">CTA</a>
+            <a class="vf-header__brand-nav-item" href="#spacing">Spacing</a>
+            <a class="vf-header__brand-nav-item" href="#radii">Radii</a>
+            <a class="vf-header__brand-nav-item" href="#templates">Templates</a>
+          </nav>
+        </div>
+      </header>
+
+      <!-- ===== Hero ===== -->
+      <section class="vf-hero">
+        <div class="vf-hero__content">
+          <h1 class="vf-hero__title">Er is altijd een token</h1>
+          <a href="#logos" class="vf-hero__cta">Bekijk het Vattenfall Design System</a>
+        </div>
+        <div class="vf-hero__form">
+          <div class="vf-hero__form-badge">
+            <span>tot</span>
+            <strong>€350</strong>
+            <span>korting</span>
+          </div>
+          <h2 class="vf-hero__form-title">Nog geen component? Check welk component het beste bij jouw probleem past.</h2>
+          <a href="#logos" class="vf-hero__form-submit">naar het design system</a>
+          <div class="vf-hero__form-foot">
+            <span class="vf-hero__form-foot-icon">
+              <svg viewBox="0 0 16 16" fill="currentColor">
+                <path d="M6.5 10.6L3.9 8l-.9.9 3.5 3.5L13.5 6 12.6 5z" />
+              </svg>
+            </span>
+            daar krijg je energie van!
+          </div>
+          <a href="#logos" class="vf-hero__form-link">
+            <svg viewBox="0 0 16 16" fill="none">
+              <path
+                d="M3 8H13M13 8L9 4M13 8L9 12"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            klik hier voor ons dynamisch design system
+          </a>
+        </div>
+      </section>
+
+      <!-- ===== Snel naar tiles ===== -->
+      <section class="section" id="templates" style="padding-top: 56px">
+        <div class="section__head">
+          <div class="section__eyebrow">Template — Snel naar</div>
+          <h2 class="section__title">Snel naar</h2>
+          <p class="section__lede">
+            Tegel-rij met grote iconen en korte titels. Vattenfall plaatst deze direct
+            onder de hero.
+          </p>
+        </div>
+        <div class="tiles">
+          <div class="tile">
+            <svg class="tile__icon" viewBox="0 0 48 48" fill="none">
+              <rect
+                x="6"
+                y="14"
+                width="32"
+                height="20"
+                rx="2"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <rect x="38" y="20" width="4" height="8" rx="1" fill="currentColor" />
+              <path
+                d="M14 18L14 30M20 24L20 30M14 24H20"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+              <path d="M26 18H32M29 15V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <h3 class="tile__title">Ik verhuis en wil naar Vattenfall</h3>
+          </div>
+          <div class="tile">
+            <svg class="tile__icon" viewBox="0 0 48 48" fill="none">
+              <path
+                d="M10 6H30L38 14V42H10V6Z"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linejoin="round"
+              />
+              <path d="M30 6V14H38" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+              <path
+                d="M16 22H32M16 28H32M16 34H24"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <h3 class="tile__title">Ons dynamisch energiecontract: FlexPrijs</h3>
+          </div>
+          <div class="tile">
+            <svg class="tile__icon" viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M18 24L22 28L30 20"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <h3 class="tile__title">Bekijk je verbruik en factuur</h3>
+          </div>
+          <div class="tile">
+            <svg class="tile__icon" viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="18" r="6" stroke="currentColor" stroke-width="2" />
+              <path
+                d="M10 40C10 33.4 16.3 28 24 28C31.7 28 38 33.4 38 40"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <h3 class="tile__title">Snel naar de klantenservice</h3>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Logo ===== -->
+      <section class="section" id="logos">
+        <div class="section__head">
+          <div class="section__eyebrow">01 — Logo</div>
+          <h2 class="section__title">Merk-logo's</h2>
+          <p class="section__lede">
+            Het Vattenfall-logo bestaat uit het halve-cirkel symbool (geel boven, blauw
+            onder) plus het woordmerk in grijs. Op donker wordt het woordmerk wit, het
+            symbool blijft geel + blauw.
+          </p>
+        </div>
+        <div class="logos">
+          <div class="logo-card" style="background: var(--vf-white)">
+            <img src="./assets/logo-vattenfall.svg" alt="Vattenfall op wit" />
+            <div class="logo-card__meta">Op wit · standaard</div>
+          </div>
+          <div class="logo-card" style="background: var(--vf-yellow)">
+            <img src="./assets/logo-vattenfall.svg" alt="Vattenfall op geel" />
+            <div class="logo-card__meta" style="color: var(--vf-black)">Op geel · campagne</div>
+          </div>
+          <div class="logo-card" style="background: var(--vf-blue)">
+            <img
+              src="./assets/logo-vattenfall.svg"
+              alt="Vattenfall op blauw"
+              class="logo-card__img--invert"
+            />
+            <div class="logo-card__meta" style="color: var(--vf-white)">Op blauw · CTA-banner</div>
+          </div>
+          <div class="logo-card" style="background: var(--vf-black)">
+            <img
+              src="./assets/logo-vattenfall.svg"
+              alt="Vattenfall op zwart"
+              class="logo-card__img--invert"
+            />
+            <div class="logo-card__meta" style="color: var(--vf-white)">Op zwart · hero</div>
+          </div>
+          <div class="logo-card" style="background: var(--vf-white)">
+            <img
+              src="./assets/EDB_logo-black.svg"
+              alt="EdBloom op wit"
+              class="logo-card__img--small"
+            />
+            <div class="logo-card__meta">EdBloom · co-brand</div>
+          </div>
+          <div class="logo-card" style="background: var(--vf-black)">
+            <img
+              src="./assets/EDB_logo-white.svg"
+              alt="EdBloom op zwart"
+              class="logo-card__img--small"
+            />
+            <div class="logo-card__meta" style="color: var(--vf-white)">EdBloom · op donker</div>
+          </div>
+          <div class="logo-card logo-card--combo" style="background: var(--vf-white)">
+            <img src="./assets/logo-vattenfall.svg" alt="Vattenfall" />
+            <span class="logo-card__divider"></span>
+            <img
+              src="./assets/EDB_logo-black.svg"
+              alt="EdBloom"
+              class="logo-card__img--small"
+            />
+            <div class="logo-card__meta">Combinatie op Session Poll header</div>
+          </div>
+        </div>
+        <div class="logo-rules">
+          <h3>Gebruiksregels</h3>
+          <ul>
+            <li>Symbool en woordmerk staan altijd samen op deze landscape-versie.</li>
+            <li>Op donker wordt het woordmerk wit. Het symbool blijft geel + blauw.</li>
+            <li>Minimale clear space rondom het logo gelijk aan de hoogte van het symbool.</li>
+            <li>Minimale weergavebreedte: 120px desktop, 80px mobile.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ===== Kleuren ===== -->
+      <section class="section" id="colors">
+        <div class="section__head">
+          <div class="section__eyebrow">02 — Kleuren</div>
+          <h2 class="section__title">Kleurenpalet</h2>
+          <p class="section__lede">
+            Klik op een swatch om de hex-waarde naar je klembord te kopiëren. Geel en blauw
+            zijn de signatuurkleuren, de rest is ondersteunend.
+          </p>
+        </div>
+        <div class="colors">
+          <button class="color" data-hex="#FFDA00" data-name="Vattenfall Yellow">
+            <div class="color__swatch" style="background: #ffda00">
+              <span class="color__hint">Klik om te kopiëren</span>
+            </div>
+            <div class="color__body">
+              <div class="color__name">Vattenfall Yellow</div>
+              <div class="color__hex">#FFDA00 · hsl(51 100% 50%)</div>
+            </div>
+          </button>
+          <button class="color" data-hex="#2071B5" data-name="Vattenfall Blue">
+            <div class="color__swatch" style="background: #2071b5">
+              <span class="color__hint">Klik om te kopiëren</span>
+            </div>
+            <div class="color__body">
+              <div class="color__name">Vattenfall Blue</div>
+              <div class="color__hex">#2071B5 · hsl(208 70% 42%)</div>
+            </div>
+          </button>
+          <button class="color" data-hex="#1A5E9A" data-name="Vattenfall Blue Dark">
+            <div class="color__swatch" style="background: #1a5e9a">
+              <span class="color__hint">Klik om te kopiëren</span>
+            </div>
+            <div class="color__body">
+              <div class="color__name">Vattenfall Blue Dark</div>
+              <div class="color__hex">#1A5E9A · onder-band CTA</div>
+            </div>
+          </button>
+          <button class="color" data-hex="#000000" data-name="Black">
+            <div class="color__swatch" style="background: #000">
+              <span class="color__hint">Klik om te kopiëren</span>
+            </div>
+            <div class="color__body">
+              <div class="color__name">Black</div>
+              <div class="color__hex">#000000 · body tekst</div>
+            </div>
+          </button>
+          <button class="color" data-hex="#FFFFFF" data-name="White">
+            <div
+              class="color__swatch"
+              style="background: #fff; box-shadow: inset 0 0 0 1px #eee"
+            >
+              <span class="color__hint">Klik om te kopiëren</span>
+            </div>
+            <div class="color__body">
+              <div class="color__name">White</div>
+              <div class="color__hex">#FFFFFF · achtergrond</div>
+            </div>
+          </button>
+          <button class="color" data-hex="#F5F5F5" data-name="Gray 50">
+            <div class="color__swatch" style="background: #f5f5f5; box-shadow: inset 0 0 0 1px #eee">
+              <span class="color__hint">Klik om te kopiëren</span>
+            </div>
+            <div class="color__body">
+              <div class="color__name">Gray 50</div>
+              <div class="color__hex">#F5F5F5 · page background</div>
+            </div>
+          </button>
+          <button class="color" data-hex="#767676" data-name="Gray border">
+            <div class="color__swatch" style="background: #767676">
+              <span class="color__hint">Klik om te kopiëren</span>
+            </div>
+            <div class="color__body">
+              <div class="color__name">Gray border</div>
+              <div class="color__hex">#767676 · input randen</div>
+            </div>
+          </button>
+          <button class="color" data-hex="#1E324F" data-name="Navy">
+            <div class="color__swatch" style="background: #1e324f">
+              <span class="color__hint">Klik om te kopiëren</span>
+            </div>
+            <div class="color__body">
+              <div class="color__name">Navy</div>
+              <div class="color__hex">#1E324F · donker accent</div>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <!-- ===== Typografie ===== -->
+      <section class="section" id="typography">
+        <div class="section__head">
+          <div class="section__eyebrow">03 — Typografie</div>
+          <h2 class="section__title">Schaal en gewichten</h2>
+          <p class="section__lede">
+            Vattenfall gebruikt het eigen lettertype <strong>Vattenfall Hall</strong> in
+            vijf gewichten plus een aparte <strong>Vattenfall Hall Display</strong> voor
+            koppen. Geserveerd vanaf cdn.vattenfall.nl.
+          </p>
+        </div>
+        <div>
+          <div class="type-row">
+            <div class="type-row__meta">display</div>
+            <p class="type-row__sample t-display">Er is altijd een weg</p>
+            <div class="type-row__specs">Display · 56 / 64 · weight 600</div>
+          </div>
+          <div class="type-row">
+            <div class="type-row__meta">h1</div>
+            <p class="type-row__sample t-h1">Welke AI-tools gebruik je?</p>
+            <div class="type-row__specs">Display · 32 / 40 · weight 600</div>
+          </div>
+          <div class="type-row">
+            <div class="type-row__meta">h2</div>
+            <p class="type-row__sample t-h2">Welke energie past het beste bij jou?</p>
+            <div class="type-row__specs">Hall · 22 / 32 · weight 600</div>
+          </div>
+          <div class="type-row">
+            <div class="type-row__meta">h3</div>
+            <p class="type-row__sample t-h3">Ik verhuis en wil naar Vattenfall</p>
+            <div class="type-row__specs">Hall · 18 / 24 · weight 600</div>
+          </div>
+          <div class="type-row">
+            <div class="type-row__meta">body</div>
+            <p class="type-row__sample t-body">
+              Standaard lopende tekst voor paragrafen, instructies en uitleg op de pagina.
+            </p>
+            <div class="type-row__specs">Hall · 16 / 24 · weight 400</div>
+          </div>
+          <div class="type-row">
+            <div class="type-row__meta">nav</div>
+            <p class="type-row__sample t-nav">Aanbiedingen · Onze producten · Klimaat</p>
+            <div class="type-row__specs">Hall · 16 / 24 · weight 500</div>
+          </div>
+          <div class="type-row">
+            <div class="type-row__meta">small</div>
+            <p class="type-row__sample t-small">Captions, meta-informatie en footnotes</p>
+            <div class="type-row__specs">Hall · 14 / 20 · weight 400</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Knoppen ===== -->
+      <section class="section" id="buttons">
+        <div class="section__head">
+          <div class="section__eyebrow">04 — Knoppen</div>
+          <h2 class="section__title">Buttons</h2>
+          <p class="section__lede">
+            Hover over de knoppen om de interacties te zien. Primary is een gele pill, op
+            donker een witte pill met blauwe tekst.
+          </p>
+        </div>
+        <div class="btn-grid">
+          <div class="btn-card">
+            <span class="btn-card__label">Primary</span>
+            <button class="vf-btn vf-btn--primary">Ga door</button>
+            <span class="color__hex">geel · pill · 14×40</span>
+          </div>
+          <div class="btn-card btn-card--dark">
+            <span class="btn-card__label">Primary white</span>
+            <button class="vf-btn vf-btn--primary-white">Bekijk wat we doen</button>
+            <span class="color__hex">wit · pill · op donker</span>
+          </div>
+          <div class="btn-card">
+            <span class="btn-card__label">Secondary</span>
+            <button class="vf-btn vf-btn--secondary">Verzenden</button>
+            <span class="color__hex">navy · radius 8 · 12×24</span>
+          </div>
+          <div class="btn-card">
+            <span class="btn-card__label">Ghost</span>
+            <button class="vf-btn vf-btn--ghost">Annuleren</button>
+            <span class="color__hex">transparant · zwart border</span>
+          </div>
+          <div class="btn-card">
+            <span class="btn-card__label">Link</span>
+            <button class="vf-btn vf-btn--link">Meer informatie</button>
+            <span class="color__hex">blauw · underline</span>
+          </div>
+          <div class="btn-card btn-card--blue">
+            <span class="btn-card__label">Op blauwe sectie</span>
+            <button class="vf-btn vf-btn--primary-white">Word klant</button>
+            <span class="color__hex">witte CTA op CTA-banner</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Formulier ===== -->
+      <section class="section" id="forms">
+        <div class="section__head">
+          <div class="section__eyebrow">05 — Formulieren</div>
+          <h2 class="section__title">Inputs</h2>
+          <p class="section__lede">
+            Eenvoudige inputs, 4px radius, grijze border, blauw focus-frame.
+          </p>
+        </div>
+        <form class="form" onsubmit="event.preventDefault()">
+          <div>
+            <label for="naam">Naam</label>
+            <input id="naam" type="text" placeholder="Jasper" />
+          </div>
+          <div>
+            <label for="email">E-mail</label>
+            <input id="email" type="email" placeholder="jasper@edbloom.nl" />
+            <div class="help">Tap het veld om de focus state te zien.</div>
+          </div>
+          <button class="vf-btn vf-btn--primary" type="submit">Verstuur</button>
+        </form>
+      </section>
+
+      <!-- ===== Cards ===== -->
+      <section class="section" id="cards">
+        <div class="section__head">
+          <div class="section__eyebrow">06 — Cards</div>
+          <h2 class="section__title">Tile-cards</h2>
+          <p class="section__lede">
+            Drie tile-cards zoals Vattenfall ze in feature-secties gebruikt. Hover voor de
+            schaduw-state.
+          </p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="card__image"></div>
+            <h3 class="card__title">Ik verhuis en wil naar Vattenfall</h3>
+            <p class="card__body">Regel je nieuwe contract in een paar minuten.</p>
+          </article>
+          <article class="card">
+            <div class="card__image card__image--blue"></div>
+            <h3 class="card__title">Ons dynamisch energiecontract</h3>
+            <p class="card__body">FlexPrijs past zich elk uur aan de markt aan.</p>
+          </article>
+          <article class="card">
+            <div class="card__image card__image--dark"></div>
+            <h3 class="card__title">Snel naar de klantenservice</h3>
+            <p class="card__body">Antwoord op de meest gestelde vragen.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===== CTA banner ===== -->
+      <section class="section" id="cta">
+        <div class="section__head">
+          <div class="section__eyebrow">07 — CTA banner</div>
+          <h2 class="section__title">Conversie-sectie</h2>
+          <p class="section__lede">
+            Brede blauwe sectie met witte titel en witte pill-CTA. Vattenfall plaatst deze
+            direct onder de hero op de homepage.
+          </p>
+        </div>
+        <div class="cta-banner">
+          <h3 class="cta-banner__title">Nog geen klant? Check welke energie het beste bij jou past</h3>
+          <a href="#" class="vf-btn vf-btn--primary-white">Bekijk onze aanbiedingen</a>
+        </div>
+      </section>
+
+      <!-- ===== Spacing ===== -->
+      <section class="section" id="spacing">
+        <div class="section__head">
+          <div class="section__eyebrow">08 — Spacing</div>
+          <h2 class="section__title">Spacing schaal</h2>
+          <p class="section__lede">4px-grid. Gebruik deze tokens consistent voor padding en gap.</p>
+        </div>
+        <div>
+          <div class="spacing-row">
+            <span class="spacing-row__token">xs</span>
+            <div class="spacing-row__bar" style="width: 4px"></div>
+            <span class="spacing-row__value">4 px</span>
+          </div>
+          <div class="spacing-row">
+            <span class="spacing-row__token">sm</span>
+            <div class="spacing-row__bar" style="width: 8px"></div>
+            <span class="spacing-row__value">8 px</span>
+          </div>
+          <div class="spacing-row">
+            <span class="spacing-row__token">md</span>
+            <div class="spacing-row__bar" style="width: 12px"></div>
+            <span class="spacing-row__value">12 px</span>
+          </div>
+          <div class="spacing-row">
+            <span class="spacing-row__token">base</span>
+            <div class="spacing-row__bar" style="width: 16px"></div>
+            <span class="spacing-row__value">16 px</span>
+          </div>
+          <div class="spacing-row">
+            <span class="spacing-row__token">lg</span>
+            <div class="spacing-row__bar" style="width: 24px"></div>
+            <span class="spacing-row__value">24 px</span>
+          </div>
+          <div class="spacing-row">
+            <span class="spacing-row__token">xl</span>
+            <div class="spacing-row__bar" style="width: 32px"></div>
+            <span class="spacing-row__value">32 px</span>
+          </div>
+          <div class="spacing-row">
+            <span class="spacing-row__token">2xl</span>
+            <div class="spacing-row__bar" style="width: 48px"></div>
+            <span class="spacing-row__value">48 px</span>
+          </div>
+          <div class="spacing-row">
+            <span class="spacing-row__token">3xl</span>
+            <div class="spacing-row__bar" style="width: 64px"></div>
+            <span class="spacing-row__value">64 px</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Border radius ===== -->
+      <section class="section" id="radii">
+        <div class="section__head">
+          <div class="section__eyebrow">09 — Border radius</div>
+          <h2 class="section__title">Radii</h2>
+          <p class="section__lede">
+            Inputs zijn klein afgerond, knoppen volledig pill, cards en banners ergens
+            tussenin.
+          </p>
+        </div>
+        <div class="radii">
+          <div class="radius">
+            <div class="radius__box" style="border-radius: 4px"></div>
+            <div class="radius__name">sm · 4px</div>
+            <div class="color__hex">input</div>
+          </div>
+          <div class="radius">
+            <div class="radius__box" style="border-radius: 8px"></div>
+            <div class="radius__name">md · 8px</div>
+            <div class="color__hex">card, secondary btn</div>
+          </div>
+          <div class="radius">
+            <div class="radius__box" style="border-radius: 26px"></div>
+            <div class="radius__name">pill · 26px</div>
+            <div class="color__hex">primary btn</div>
+          </div>
+          <div class="radius">
+            <div class="radius__box" style="border-radius: 9999px"></div>
+            <div class="radius__name">circle · ∞</div>
+            <div class="color__hex">avatar, icon-btn</div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <div class="foot__row">
+          <div>
+            Vattenfall design tokens — gedistilleerd uit
+            <a href="https://www.vattenfall.nl" style="color: var(--vf-blue)">vattenfall.nl</a>
+            op 2026-05-18.
+          </div>
+          <div>Ed Bloom Digital · Session Poll · ED-193</div>
+        </div>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast">Hex gekopieerd</div>
+
+    <script>
+      const toast = document.getElementById("toast");
+      let toastTimer;
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("is-visible");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("is-visible"), 1600);
+      }
+
+      document.querySelectorAll(".color").forEach((swatch) => {
+        swatch.addEventListener("click", async () => {
+          const hex = swatch.dataset.hex || "";
+          const name = swatch.dataset.name || "Kleur";
+          try {
+            await navigator.clipboard.writeText(hex);
+            showToast(`${name} · ${hex} gekopieerd`);
+          } catch (err) {
+            showToast(`Kon niet kopiëren — ${hex}`);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
