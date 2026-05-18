@@ -3,15 +3,6 @@
  * Stijlschets: docs/ui-design/ED-194-stijlschets.html
  */
 
-/* Cross-document view transitions — Chrome/Edge support. Browsers without
-   support ignore this rule and fall back to default navigation. */
-@view-transition { navigation: auto; }
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 220ms;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 :root {
   --bg: #000000;
   --surface: #29293d;
