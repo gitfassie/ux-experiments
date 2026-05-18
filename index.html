@@ -1,397 +1,76 @@
 <!doctype html>
-<html lang="nl">
+<html lang="nl" data-theme="black">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>UX Experiments — Sandbox</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>UX Experiments · Sandbox</title>
 
-  <link rel="preconnect" href="https://cdn.ui.porsche.com" crossorigin />
-  <link rel="preload" href="https://cdn.ui.porsche.com/porsche-design-system/fonts/porsche-next-latin-regular.b8f1c20.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="https://cdn.ui.porsche.com/porsche-design-system/fonts/porsche-next-latin-semi-bold.b5f6fca.woff2" as="font" type="font/woff2" crossorigin />
-
-  <style>
-    @font-face {
-      font-family: "Porsche Next";
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url("https://cdn.ui.porsche.com/porsche-design-system/fonts/porsche-next-latin-regular.b8f1c20.woff2") format("woff2");
-    }
-    @font-face {
-      font-family: "Porsche Next";
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-      src: url("https://cdn.ui.porsche.com/porsche-design-system/fonts/porsche-next-latin-semi-bold.b5f6fca.woff2") format("woff2");
-    }
-
-    :root {
-      color-scheme: light dark;
-
-      --p-color-canvas:           light-dark(#ffffff, hsl(225 66.7% 1.2%));
-      --p-color-surface:          light-dark(hsl(240 10% 95%), hsl(240 2% 10%));
-      --p-color-frosted:          light-dark(hsl(240 5% 70% / 0.148), hsl(240 2% 43% / 0.228));
-      --p-color-primary:          light-dark(hsl(225 66.7% 1.2%), hsl(225 100% 99%));
-      --p-color-contrast-low:     light-dark(hsl(240 5.3% 14.9% / 0.5),  hsl(240 12.5% 96.9% / 0.45));
-      --p-color-contrast-medium:  light-dark(hsl(240 6.1% 7% / 0.6),     hsl(240 12.5% 96.9% / 0.56));
-      --p-color-contrast-high:    light-dark(hsl(240 7.1% 11% / 0.7),    hsl(240 12.5% 96.9% / 0.67));
-
-      --p-spacing-static-xs: 4px;
-      --p-spacing-static-sm: 8px;
-      --p-spacing-static-md: 16px;
-      --p-spacing-static-lg: 32px;
-      --p-spacing-static-xl: 48px;
-      --p-spacing-fluid-md: clamp(16px, 1.25vw + 12px, 36px);
-      --p-spacing-fluid-lg: clamp(32px, 2.75vw + 23px, 76px);
-      --p-spacing-fluid-xl: clamp(48px, 3vw + 38px, 96px);
-      --p-spacing-fluid-2xl: clamp(80px, 7.5vw + 56px, 200px);
-
-      --p-radius-sm: 4px;
-      --p-radius-md: 6px;
-      --p-radius-lg: 8px;
-      --p-radius-xl: 12px;
-      --p-radius-2xl: 16px;
-      --p-radius-3xl: 24px;
-    }
-
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
-    body {
-      font-family: "Porsche Next", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      font-weight: 400;
-      background: var(--p-color-canvas);
-      color: var(--p-color-primary);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-      min-height: 100vh;
-      position: relative;
-      isolation: isolate;
-      overflow-x: hidden;
-    }
-
-    /* Tof Porsche-style background: aurora blobs + faded grid */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: -10vmax;
-      pointer-events: none;
-      z-index: -2;
-      background:
-        radial-gradient(60vmax 50vmax at 10% 0%,
-          light-dark(hsl(225 80% 60% / 0.10), hsl(225 90% 60% / 0.22)),
-          transparent 60%),
-        radial-gradient(55vmax 45vmax at 90% 30%,
-          light-dark(hsl(280 80% 65% / 0.08), hsl(280 90% 65% / 0.18)),
-          transparent 60%),
-        radial-gradient(70vmax 55vmax at 50% 110%,
-          light-dark(hsl(190 80% 55% / 0.08), hsl(190 90% 55% / 0.18)),
-          transparent 60%);
-      filter: blur(40px) saturate(120%);
-      animation: aurora 30s ease-in-out infinite alternate;
-    }
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-      background-image:
-        linear-gradient(to right, var(--p-color-contrast-low) 1px, transparent 1px),
-        linear-gradient(to bottom, var(--p-color-contrast-low) 1px, transparent 1px);
-      background-size: 64px 64px;
-      mask-image: radial-gradient(ellipse 80% 65% at 50% 30%, black 30%, transparent 80%);
-      -webkit-mask-image: radial-gradient(ellipse 80% 65% at 50% 30%, black 30%, transparent 80%);
-      opacity: 0.18;
-    }
-    @keyframes aurora {
-      0%   { transform: translate3d(0,0,0) scale(1); }
-      50%  { transform: translate3d(-2%, 2%, 0) scale(1.05); }
-      100% { transform: translate3d(2%, -2%, 0) scale(1); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      body::before { animation: none; }
-    }
-
-    /* Top bar */
-    .topbar {
-      position: sticky;
-      top: 0;
-      background: color-mix(in srgb, var(--p-color-canvas) 80%, transparent);
-      backdrop-filter: saturate(180%) blur(14px);
-      -webkit-backdrop-filter: saturate(180%) blur(14px);
-      border-bottom: 1px solid var(--p-color-contrast-low);
-      padding: var(--p-spacing-static-md) var(--p-spacing-fluid-lg);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      z-index: 10;
-    }
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 36px;
-      text-decoration: none;
-      color: var(--p-color-primary);
-    }
-    .brand-logo {
-      height: 26px;
-      width: auto;
-      flex-shrink: 0;
-      color: var(--p-color-primary);
-    }
-    .brand-text {
-      font-family: "Porsche Next", system-ui, sans-serif;
-      font-weight: 600;
-      font-size: 0.8125rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--p-color-primary);
-      white-space: nowrap;
-    }
-    .brand-divider {
-      color: var(--p-color-contrast-low);
-      margin: 0 var(--p-spacing-static-sm);
-      font-weight: 400;
-    }
-    .brand-sub {
-      color: var(--p-color-contrast-medium);
-      font-weight: 400;
-    }
-    .topbar-meta {
-      font-family: "Porsche Next", system-ui, sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--p-color-contrast-medium);
-    }
-    @media (max-width: 520px) {
-      .brand { gap: 20px; }
-      .brand-text { display: none; }
-    }
-
-    /* Hero */
-    .hero {
-      padding: var(--p-spacing-fluid-2xl) var(--p-spacing-fluid-lg) var(--p-spacing-fluid-xl);
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-    .eyebrow {
-      font-family: "Porsche Next", system-ui, sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--p-color-contrast-medium);
-      margin: 0 0 var(--p-spacing-static-lg);
-      display: flex;
-      align-items: center;
-      gap: var(--p-spacing-static-sm);
-    }
-    .eyebrow::before {
-      content: "";
-      display: inline-block;
-      width: 24px;
-      height: 1px;
-      background: var(--p-color-primary);
-    }
-
-    h1.display {
-      font-family: "Porsche Next", system-ui, sans-serif;
-      font-weight: 600;
-      font-size: clamp(3rem, 8vw + 0.5rem, 7.5rem);
-      line-height: 0.94;
-      letter-spacing: -0.045em;
-      color: var(--p-color-primary);
-      margin: 0 0 var(--p-spacing-fluid-md);
-      max-width: 14ch;
-    }
-    .lead {
-      font-family: "Porsche Next", system-ui, sans-serif;
-      font-weight: 400;
-      font-size: clamp(1.0625rem, 0.6vw + 0.9rem, 1.375rem);
-      line-height: 1.45;
-      color: var(--p-color-contrast-high);
-      max-width: 56ch;
-      margin: 0;
-    }
-
-    /* Experiments grid */
-    .section {
-      padding: 0 var(--p-spacing-fluid-lg) var(--p-spacing-fluid-2xl);
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-    .section-head {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: var(--p-spacing-static-md);
-      padding-bottom: var(--p-spacing-static-md);
-      margin-bottom: var(--p-spacing-fluid-md);
-      border-bottom: 1px solid var(--p-color-contrast-low);
-    }
-    .section-title {
-      font-family: "Porsche Next", system-ui, sans-serif;
-      font-weight: 600;
-      font-size: clamp(1.5rem, 1.5vw + 1rem, 2.25rem);
-      letter-spacing: -0.025em;
-      line-height: 1.1;
-      margin: 0;
-      color: var(--p-color-primary);
-    }
-    .section-count {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--p-color-contrast-medium);
-    }
-
-    .list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
-      gap: var(--p-spacing-static-md);
-    }
-
-    .card {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: var(--p-spacing-fluid-lg);
-      min-height: 240px;
-      padding: var(--p-spacing-fluid-md);
-      background: color-mix(in srgb, var(--p-color-surface) 80%, transparent);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid var(--p-color-contrast-low);
-      border-radius: var(--p-radius-2xl);
-      text-decoration: none;
-      color: inherit;
-      overflow: hidden;
-      transition:
-        border-color 0.25s ease,
-        transform 0.25s ease,
-        background 0.25s ease;
-    }
-    .card::after {
-      content: "→";
-      position: absolute;
-      bottom: var(--p-spacing-fluid-md);
-      right: var(--p-spacing-fluid-md);
-      font-size: 1.5rem;
-      font-weight: 400;
-      line-height: 1;
-      color: var(--p-color-contrast-medium);
-      transition: transform 0.25s ease, color 0.25s ease;
-    }
-    .card:hover {
-      border-color: var(--p-color-primary);
-      transform: translateY(-2px);
-    }
-    .card:hover::after {
-      transform: translateX(4px);
-      color: var(--p-color-primary);
-    }
-    .card-eyebrow {
-      font-family: "Porsche Next", system-ui, sans-serif;
-      font-size: 0.6875rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--p-color-contrast-medium);
-      margin: 0;
-    }
-    .card-title {
-      font-family: "Porsche Next", system-ui, sans-serif;
-      font-weight: 600;
-      font-size: clamp(1.375rem, 1vw + 1rem, 1.75rem);
-      line-height: 1.1;
-      letter-spacing: -0.025em;
-      color: var(--p-color-primary);
-      margin: 0;
-      max-width: 22ch;
-    }
-    .card-meta {
-      font-size: 0.875rem;
-      line-height: 1.5;
-      color: var(--p-color-contrast-medium);
-      margin: 0;
-      max-width: 32ch;
-    }
-
-    footer {
-      padding: var(--p-spacing-fluid-lg) var(--p-spacing-fluid-lg) var(--p-spacing-fluid-xl);
-      max-width: 1280px;
-      margin: 0 auto;
-      border-top: 1px solid var(--p-color-contrast-low);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--p-spacing-static-md);
-      font-size: 0.75rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--p-color-contrast-low);
-    }
-    footer a {
-      color: var(--p-color-contrast-medium);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s ease, color 0.2s ease;
-    }
-    footer a:hover {
-      color: var(--p-color-primary);
-      border-color: var(--p-color-primary);
-    }
-  </style>
+  <link rel="stylesheet" href="https://use.typekit.net/qal5tnq.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="./assets/styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="./index.html" aria-label="EdBloom · UX Experiments">
-      <svg class="brand-logo" viewBox="0 0 374 123" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M59.4976 52.8616H6.80578V6.80282H59.4976" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
-        <path d="M115.718 52.8616H69.6388V6.80282H106.367L115.718 15.581V52.8616Z" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
-        <path d="M184.749 116.197H132.481V63.4512" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
-        <path d="M241.384 70.1384H195.305V116.197H241.384V70.1384Z" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
-        <path d="M304.65 70.1384H258.572V116.197H304.65V70.1384Z" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
-        <path d="M321.106 122.933V70.1384H367.185V122.933" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
-        <path d="M2.14006 30.6994H44.922" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
-        <path d="M344.116 74.8792V122.47" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
-        <path d="M115.419 116.197H69.3399V70.1384H103.128L103.485 93.1678L115.419 93.2064V116.197Z" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
-        <path d="M75.5963 93.1678H102.897" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
-      </svg>
-      <span class="brand-text">UX Experiments<span class="brand-divider">·</span><span class="brand-sub">Sandbox</span></span>
-    </a>
-    <div class="topbar-meta">v0.1 · 2026</div>
-  </header>
+  <div class="shell">
 
-  <section class="hero">
-    <p class="eyebrow">Claude Code · Static prototypes</p>
-    <h1 class="display">Een speeltuin voor UX die durft.</h1>
-    <p class="lead">Hier parkeert Claude Code UX-prototypes voor live sessies en interne reviews. Geen frameworks, geen build step — gewoon HTML, CSS en intentie.</p>
-  </section>
-
-  <section class="section">
-    <header class="section-head">
-      <h2 class="section-title">Experimenten</h2>
-      <span class="section-count">01 — Active</span>
+    <header class="topbar">
+      <a class="brand" href="./index.html" aria-label="EdBloom · UX Experiments">
+        <svg class="logo" viewBox="0 0 374 123" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M59.4976 52.8616H6.80578V6.80282H59.4976" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
+          <path d="M115.718 52.8616H69.6388V6.80282H106.367L115.718 15.581V52.8616Z" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
+          <path d="M184.749 116.197H132.481V63.4512" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
+          <path d="M241.384 70.1384H195.305V116.197H241.384V70.1384Z" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
+          <path d="M304.65 70.1384H258.572V116.197H304.65V70.1384Z" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
+          <path d="M321.106 122.933V70.1384H367.185V122.933" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
+          <path d="M2.14006 30.6994H44.922" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
+          <path d="M344.116 74.8792V122.47" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
+          <path d="M115.419 116.197H69.3399V70.1384H103.128L103.485 93.1678L115.419 93.2064V116.197Z" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
+          <path d="M75.5963 93.1678H102.897" stroke="currentColor" stroke-width="14.13" stroke-miterlimit="10"/>
+        </svg>
+      </a>
+      <span class="display topbar-meta">UX BOXRING</span>
     </header>
 
-    <div class="list">
-      <a class="card" href="./vattenfall/index.html">
-        <p class="card-eyebrow">2026-05-19 · Live sessie</p>
-        <h3 class="card-title">Vattenfall AI Inspiration Session</h3>
-        <p class="card-meta">For the Vattenfall design team — UX prototypes prepared for the live session.</p>
-      </a>
-    </div>
-  </section>
+    <main class="canvas">
 
-  <footer>
-    <span>EdBloom · UX Experiments</span>
-    <a href="https://github.com/gitfassie/ux-experiments">github.com/gitfassie/ux-experiments</a>
-  </footer>
+      <div class="eyebrow-row">
+        <span class="display">UX EXPERIMENTS</span>
+        <span class="badge">02 ACTIVE</span>
+      </div>
+      <div class="eyebrow-divider"></div>
+
+      <h1 class="hero">Speeltuin voor UX-prototypes.</h1>
+      <p class="hero-sub">Geparkeerd door Claude Code voor live sessies en interne reviews. Geen frameworks, geen build step. Gewoon HTML, CSS en intentie.</p>
+
+      <section class="index" aria-label="Experimenten">
+        <span class="display index-label">INDEX</span>
+
+        <div class="index-list">
+          <a class="row" href="./vattenfall/index.html" style="animation-delay: 900ms">
+            <span class="row-no">001</span>
+            <span class="row-date">2026-05-19</span>
+            <span class="row-client">VATTENFALL</span>
+            <span class="row-title">AI Inspiration Session</span>
+            <span class="row-arrow" aria-hidden="true">→</span>
+          </a>
+
+          <a class="row" href="https://bndl.edbloom.nl" target="_blank" rel="noopener" style="animation-delay: 1000ms">
+            <span class="row-no">002</span>
+            <span class="row-date">2026-05-13</span>
+            <span class="row-client">BNDL</span>
+            <span class="row-title">Widget</span>
+            <span class="row-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </section>
+
+      <footer class="canvas-footer">
+        <span>v0.2 · 2026</span>
+        <a href="https://github.com/gitfassie/ux-experiments" target="_blank" rel="noopener">github.com/gitfassie/ux-experiments</a>
+      </footer>
+    </main>
+  </div>
 </body>
 </html>

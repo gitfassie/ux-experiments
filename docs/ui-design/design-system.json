@@ -1,0 +1,115 @@
+{
+  "metadata": {
+    "project": "UX Experiments",
+    "ticket": "ED-194",
+    "version": "0.1.0",
+    "lastUpdated": "2026-05-18",
+    "structure": "Atomic Design (atoms / molecules / organisms / templates / pages)",
+    "source": {
+      "figma": {
+        "fileKey": "Ef2BySmHcm4jn7Zx0sHANl",
+        "fileName": "Deck AI inspiratie sessie",
+        "url": "https://www.figma.com/design/Ef2BySmHcm4jn7Zx0sHANl/Deck-AI-inspiratie-sessie",
+        "primaryNodeId": "7:30",
+        "lastSynced": "2026-05-18"
+      }
+    },
+    "decisions": {
+      "mode": "dark-only",
+      "componentLibrary": "DaisyUI via Tailwind CDN",
+      "framework": "static HTML/CSS/JS, no build step",
+      "animationLevel": "rich (CSS-only, no React)",
+      "layout": "one fullscreen viewport, no scroll"
+    }
+  },
+
+  "atoms": {
+    "color": {
+      "background":   { "value": "#000000",                       "source": "figma:White",   "note": "Figma variable misnamed — value is pure black, used as canvas" },
+      "surface":      { "value": "#29293d",                       "source": "figma:Accent 1","note": "Optional second-layer panel/card surface" },
+      "text":         { "value": "#f8f8ff",                       "source": "figma:Color 6", "note": "Ghost white — body and headlines" },
+      "textMuted":    { "value": "rgba(248, 248, 255, 0.55)",     "source": "derived",       "note": "Captions, secondary metadata" },
+      "textDim":      { "value": "rgba(248, 248, 255, 0.30)",     "source": "derived",       "note": "Tertiary labels, dividers" },
+      "border":       { "value": "rgba(248, 248, 255, 0.10)",     "source": "derived",       "note": "Hairline outlines, container edges" },
+      "accent":       { "value": "#29293d",                       "source": "figma:Accent 1" },
+      "success":      { "value": "#5be37c",                       "source": "off-system",    "note": "⚠️ Off-system: not in Figma. Reserved for future state colours." },
+      "warning":      { "value": "#f5c043",                       "source": "off-system",    "note": "⚠️ Off-system: not in Figma." },
+      "error":        { "value": "#ff5a5a",                       "source": "off-system",    "note": "⚠️ Off-system: not in Figma." }
+    },
+
+    "typography": {
+      "fontFamily": {
+        "body":    { "value": "Inter, system-ui, sans-serif",                "source": "google-fonts", "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" },
+        "display": { "value": "\"lores-9-wide\", monospace, sans-serif",     "source": "adobe-fonts",  "kit": "qal5tnq", "url": "https://use.typekit.net/qal5tnq.css", "domainWhitelistRequired": true }
+      },
+      "scale": {
+        "xs":   "12px",
+        "sm":   "14px",
+        "base": "16px",
+        "lg":   "18px",
+        "xl":   "20px",
+        "2xl":  "24px",
+        "3xl":  "32px",
+        "4xl":  "48px",
+        "5xl":  "64px",
+        "6xl":  "96px"
+      },
+      "weight": {
+        "regular":  400,
+        "medium":   500,
+        "semibold": 600,
+        "bold":     700
+      },
+      "lineHeight": {
+        "tight":  1.1,
+        "snug":   1.25,
+        "normal": 1.5
+      },
+      "letterSpacing": {
+        "tight":  "-0.02em",
+        "normal": "0",
+        "wide":   "0.08em",
+        "wider":  "0.16em"
+      }
+    },
+
+    "spacing": {
+      "1":  "4px",
+      "2":  "8px",
+      "3":  "12px",
+      "4":  "16px",
+      "5":  "20px",
+      "6":  "24px",
+      "8":  "32px",
+      "10": "40px",
+      "12": "48px",
+      "16": "64px",
+      "20": "80px",
+      "24": "96px"
+    },
+
+    "radius": {
+      "sm":   "4px",
+      "md":   "8px",
+      "lg":   "16px",
+      "xl":   "24px",
+      "2xl":  "32px",
+      "full": "9999px"
+    },
+
+    "shadow": {
+      "glow":   "0 0 32px rgba(248, 248, 255, 0.08)",
+      "subtle": "inset 0 1px 0 rgba(248, 248, 255, 0.06)"
+    },
+
+    "motion": {
+      "duration": { "fast": "150ms", "normal": "300ms", "slow": "600ms", "ambient": "12s" },
+      "easing":   { "standard": "cubic-bezier(0.4, 0, 0.2, 1)", "spring": "cubic-bezier(0.34, 1.56, 0.64, 1)" }
+    }
+  },
+
+  "molecules": {},
+  "organisms": {},
+  "templates": {},
+  "pages": {}
+}
