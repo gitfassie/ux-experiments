@@ -72,5 +72,18 @@
       </footer>
     </main>
   </div>
+
+  <script>
+    (function () {
+      var html = document.documentElement;
+      var mark = function () { html.classList.add('fonts-ready'); };
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(mark);
+        setTimeout(mark, 1200);
+      } else {
+        mark();
+      }
+    })();
+  </script>
 </body>
 </html>

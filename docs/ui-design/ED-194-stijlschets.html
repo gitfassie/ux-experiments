@@ -42,6 +42,10 @@
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
     }
+
+    /* Hold rendering until fonts are loaded — prevents flash of fallback text */
+    .shell { visibility: hidden; }
+    html.fonts-ready .shell { visibility: visible; }
     .display {
       font-family: var(--font-display);
       letter-spacing: 0.08em;
@@ -555,6 +559,17 @@
   </aside>
 
   <script>
+    (function () {
+      var html = document.documentElement;
+      var mark = function () { html.classList.add('fonts-ready'); };
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(mark);
+        setTimeout(mark, 1200);
+      } else {
+        mark();
+      }
+    })();
+
     (function () {
       const btn      = document.getElementById('infoBtn');
       const notes    = document.getElementById('notes');

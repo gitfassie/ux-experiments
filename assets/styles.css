@@ -34,6 +34,10 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Hold rendering until fonts are loaded — prevents flash of fallback text */
+.shell { visibility: hidden; }
+html.fonts-ready .shell { visibility: visible; }
+
 .display {
   font-family: var(--font-display);
   letter-spacing: 0.08em;
